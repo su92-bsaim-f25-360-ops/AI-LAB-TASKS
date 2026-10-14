@@ -1,0 +1,11 @@
+step,temperature,occupied,case_note,expected_target,expected_send
+1,23.0,1,first percept,IDLE,1
+2,23.0,1,repeated percept,IDLE,0
+3,26.0,1,upper boundary,COOL,1
+4,27.5,1,same mode different temperature,COOL,0
+5,24.0,1,mode transition COOL to IDLE,IDLE,1
+6,20.0,1,lower boundary,HEAT,1
+7,20.0,1,repeated percept,HEAT,0
+8,28.0,0,empty room (occupancy priority),OFF,1
+9,15.0,0,empty room repeated OFF,OFF,0
+10,23.0,1,room occupied again,IDLE,1

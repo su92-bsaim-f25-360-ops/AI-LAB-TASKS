@@ -1,0 +1,28 @@
+NOTE: thresholds (cool >= 26, heat <= 20) are synthetic lab assumptions.
+
+MAIN TRACE (percepts.csv)
+step previous mode percept                            target  stateful outcome  reflex outcome  check  note
+1    None          T=23.0, occupied=True              IDLE    SEND              SEND            PASS   first percept
+2    IDLE          T=23.0, occupied=True              IDLE    NO COMMAND        SEND            PASS   repeated percept
+3    IDLE          T=26.0, occupied=True              COOL    SEND              SEND            PASS   upper boundary
+4    COOL          T=27.5, occupied=True              COOL    NO COMMAND        SEND            PASS   same mode different temperature
+5    COOL          T=24.0, occupied=True              IDLE    SEND              SEND            PASS   mode transition COOL to IDLE
+6    IDLE          T=20.0, occupied=True              HEAT    SEND              SEND            PASS   lower boundary
+7    HEAT          T=20.0, occupied=True              HEAT    NO COMMAND        SEND            PASS   repeated percept
+8    HEAT          T=28.0, occupied=False             OFF     SEND              SEND            PASS   empty room (occupancy priority)
+9    OFF           T=15.0, occupied=False             OFF     NO COMMAND        SEND            PASS   empty room repeated OFF
+10   OFF           T=23.0, occupied=True              IDLE    SEND              SEND            PASS   room occupied again
+
+stateful commands sent: 6 of 10 | reflex commands sent: 10 of 10 | all checks passed: True
+
+EDGE CASE: temperature alternating around 26 (edge_percepts.csv)
+step previous mode percept                            target  stateful outcome  reflex outcome  check  note
+1    None          T=25.9, occupied=True              IDLE    SEND              SEND            PASS   just below cool threshold
+2    IDLE          T=26.0, occupied=True              COOL    SEND              SEND            PASS   at cool threshold
+3    COOL          T=25.9, occupied=True              IDLE    SEND              SEND            PASS   just below again
+4    IDLE          T=26.0, occupied=True              COOL    SEND              SEND            PASS   at threshold again
+5    COOL          T=25.9, occupied=True              IDLE    SEND              SEND            PASS   just below again
+6    IDLE          T=26.0, occupied=True              COOL    SEND              SEND            PASS   at threshold again
+
+stateful commands sent: 6 of 6 | reflex commands sent: 6 of 6 | all checks passed: True
+
