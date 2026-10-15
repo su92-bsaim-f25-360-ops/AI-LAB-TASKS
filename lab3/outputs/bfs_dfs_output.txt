@@ -1,0 +1,26 @@
+Start A, goal G
+
+BFS trace
+step frontier before       processed path                      added (push order)
+1    [A]                   A         A                         B, C
+2    [B, C]                B         A -> B                    D, E
+3    [C, D, E]             C         A -> C                    F
+4    [D, E, F]             D         A -> B -> D               -
+5    [E, F]                E         A -> B -> E               -
+6    [F]                   F         A -> C -> F               G
+7    [G]                   G         A -> C -> F -> G          -   <- GOAL
+BFS visit order : A B C D E F G
+BFS final path  : A -> C -> F -> G  (3 edges)
+
+DFS trace
+step frontier before       processed path                      added (push order)
+1    [A]                   A         A                         C, B
+2    [C, B]                B         A -> B                    E, D
+3    [C, E, D]             D         A -> B -> D               -
+4    [C, E]                E         A -> B -> E               F
+5    [C, F]                F         A -> B -> E -> F          G, C
+6    [C, G, C]             C         A -> B -> E -> F -> C     -
+7    [C, G]                G         A -> B -> E -> F -> G     -   <- GOAL
+DFS visit order : A B D E F C G
+DFS final path  : A -> B -> E -> F -> G  (4 edges)
+

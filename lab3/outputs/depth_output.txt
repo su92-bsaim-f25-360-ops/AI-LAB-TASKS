@@ -1,0 +1,17 @@
+Start A, goal G, root depth 0
+
+DLS
+  limit 1: CUTOFF   path: none                   visits 3: A(0) B(1) C(1)
+  limit 2: CUTOFF   path: none                   visits 6: A(0) B(1) D(2) E(2) C(1) F(2)
+  limit 3: FOUND    path: A -> C -> F -> G       visits 9: A(0) B(1) D(2) E(2) F(3) C(1) F(2) E(3) G(3)
+  limit 4: FOUND    path: A -> B -> E -> F -> G  visits 7: A(0) B(1) D(2) E(2) F(3) C(4) G(4)
+
+IDDFS
+  max depth 1: CUTOFF   path: none                   limits attempted [0, 1] | per limit [0:CUTOFF(1), 1:CUTOFF(3)] | total visits 4 (last iteration 3)
+  max depth 2: CUTOFF   path: none                   limits attempted [0, 1, 2] | per limit [0:CUTOFF(1), 1:CUTOFF(3), 2:CUTOFF(6)] | total visits 10 (last iteration 6)
+  max depth 3: FOUND    path: A -> C -> F -> G       limits attempted [0, 1, 2, 3] | per limit [0:CUTOFF(1), 1:CUTOFF(3), 2:CUTOFF(6), 3:FOUND(9)] | total visits 19 (last iteration 9)
+  max depth 4: FOUND    path: A -> C -> F -> G       limits attempted [0, 1, 2, 3] | per limit [0:CUTOFF(1), 1:CUTOFF(3), 2:CUTOFF(6), 3:FOUND(9)] | total visits 19 (last iteration 9)
+
+FAILURE demonstration (goal Z does not exist in the graph)
+  limit 3: CUTOFF
+  limit 7: FAILURE

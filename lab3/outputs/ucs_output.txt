@@ -1,0 +1,27 @@
+Weighted edges (undirected, synthetic assumptions):
+  A-B: 2
+  A-C: 4
+  B-D: 3
+  B-E: 2
+  C-F: 6
+  E-F: 1
+  F-G: 3
+
+UCS trace (frontier shown as node(cost), lowest cost first, ties FIFO)
+step frontier before                   processed cost  path                      added
+1    [A(0)]                            A         0     A                         B(2), C(4)
+2    [B(2), C(4)]                      B         2     A -> B                    D(5), E(4)
+3    [C(4), E(4), D(5)]                C         4     A -> C                    F(10)
+4    [E(4), D(5), F(10)]               E         4     A -> B -> E               F(5)
+5    [D(5), F(5), F(10)]               D         5     A -> B -> D               -
+6    [F(5), F(10)]                     F         5     A -> B -> E -> F          G(8)
+7    [G(8), F(10)]                     G         8     A -> B -> E -> F -> G     -   <- GOAL
+
+UCS processing order : A B C E D F G
+UCS path             : A -> B -> E -> F -> G (4 edges)
+UCS reported cost    : 8
+Independent sum      : 2 + 2 + 1 + 3 = 8
+
+BFS route (same topology): A -> C -> F -> G (3 edges)
+BFS route cost             : 4 + 6 + 3 = 13
+Cost difference (BFS - UCS): 5

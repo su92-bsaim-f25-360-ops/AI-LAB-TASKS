@@ -1,0 +1,26 @@
+PASS  BFS frontier states
+PASS  BFS visit order
+PASS  BFS final path
+PASS  DFS frontier states
+PASS  DFS visit order
+PASS  DFS final path
+PASS  DLS limit 1
+PASS  DLS limit 2
+PASS  DLS limit 3
+PASS  DLS limit 4
+PASS  IDDFS max depth 1
+PASS  IDDFS max depth 2
+PASS  IDDFS max depth 3
+PASS  IDDFS max depth 4
+PASS  IDDFS total visits (max depth 3)
+PASS  DLS goal Z limit 3 is CUTOFF
+PASS  DLS goal Z limit 7 is FAILURE
+PASS  UCS processing order
+PASS  UCS path
+PASS  UCS reported cost
+PASS  Independent cost of UCS path (2+2+1+3)
+PASS  UCS cost equals independent sum
+PASS  BFS route cost on weighted graph (4+6+3)
+PASS  BFS route costs more than UCS route
+
+24 of 24 checks passed
