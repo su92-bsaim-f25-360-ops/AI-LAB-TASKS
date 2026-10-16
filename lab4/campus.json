@@ -1,0 +1,18 @@
+{
+  "start": "S",
+  "goal": "G",
+  "labels": {"S": "Main Gate", "A": "Library", "B": "Cafeteria", "C": "Lab Block", "D": "Admin Block", "E": "Hostel", "G": "Auditorium"},
+  "successors": {
+    "S": ["A", "B"],
+    "A": ["S", "C", "D"],
+    "B": ["S", "D", "E"],
+    "C": ["A", "G"],
+    "D": ["A", "B", "G"],
+    "E": ["B"],
+    "G": ["C", "D"]
+  },
+  "weights": {
+    "S-A": 2, "S-B": 3, "A-C": 2, "A-D": 4, "B-D": 2, "B-E": 1, "C-G": 3, "D-G": 5
+  },
+  "heuristic": {"S": 6, "A": 4, "B": 5, "C": 3, "D": 4, "E": 6, "G": 0}
+}

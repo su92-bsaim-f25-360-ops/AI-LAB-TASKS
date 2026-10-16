@@ -1,0 +1,26 @@
+PASS  expansion 1: S g=0 h=6 f=6
+PASS  expansion 1 remaining
+PASS  expansion 2: A g=2 h=4 f=6
+PASS  expansion 2 remaining
+PASS  expansion 3: C g=4 h=3 f=7
+PASS  expansion 3 remaining
+PASS  A* order
+PASS  A* path
+PASS  A* expansions / stale
+PASS  A* cost, independent sum 2+2+3
+PASS  UCS order
+PASS  UCS path
+PASS  UCS expansions / stale
+PASS  UCS cost, independent sum
+PASS  true costs h*
+PASS  original heuristic admissible and consistent
+PASS  h(C)=10 is an overestimate (10 > 3)
+PASS  h(C)=10 order
+PASS  h(C)=10 path
+PASS  h(C)=10 cost, independent sum 3+2+5
+PASS  h(C)=10 expansions / stale
+PASS  h(C)=10 audit not admissible
+PASS  h(E)=20 result unchanged (path, cost, expansions)
+PASS  h(E)=20 audit not admissible
+
+24 of 24 checks passed

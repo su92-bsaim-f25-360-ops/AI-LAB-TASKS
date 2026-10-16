@@ -1,0 +1,68 @@
+NOTE: campus graph, weights and heuristic are synthetic lab assumptions.
+
+=== Heuristic audit (original heuristic) ===
+h versus true remaining cost h* (Dijkstra from G):
+  S: h=6  h*=7  admissible
+  A: h=4  h*=5  admissible
+  B: h=5  h*=7  admissible
+  C: h=3  h*=3  admissible
+  D: h=4  h*=5  admissible
+  E: h=6  h*=8  admissible
+  G: h=0  h*=0  admissible
+  admissible: True | consistent: True
+
+=== A* with the supplied heuristic ===
+step frontier before (node(g+h=f))                       processed g+h=f    generated / skipped
+1    [S(0+6=6)]                                          S         0+6=6    A(2+4=6), B(3+5=8)
+2    [A(2+4=6), B(3+5=8)]                                A         2+4=6    C(4+3=7), D(6+4=10)  | skipped (already processed): S
+3    [C(4+3=7), B(3+5=8), D(6+4=10)]                     C         4+3=7    G(7+0=7)  | skipped (already processed): A
+4    [G(7+0=7), B(3+5=8), D(6+4=10)]                     G         7+0=7    -   <- GOAL
+A*: path S -> A -> C -> G | reported cost 7 | independent sum 2 + 2 + 3 = 7 | processed order S A C G | expansions (goal included) 4 | excluding goal 3 | stale pops 0
+
+=== UCS (zero-heuristic control) ===
+step frontier before (node(g+h=f))                       processed g+h=f    generated / skipped
+1    [S(0+0=0)]                                          S         0+0=0    A(2+0=2), B(3+0=3)
+2    [A(2+0=2), B(3+0=3)]                                A         2+0=2    C(4+0=4), D(6+0=6)  | skipped (already processed): S
+3    [B(3+0=3), C(4+0=4), D(6+0=6)]                      B         3+0=3    D(5+0=5), E(4+0=4)  | skipped (already processed): S
+4    [C(4+0=4), E(4+0=4), D(5+0=5), D(6+0=6)]            C         4+0=4    G(7+0=7)  | skipped (already processed): A
+5    [E(4+0=4), D(5+0=5), D(6+0=6), G(7+0=7)]            E         4+0=4    -  | skipped (already processed): B
+6    [D(5+0=5), D(6+0=6), G(7+0=7)]                      D         5+0=5    G(10+0=10)  | skipped (already processed): A, B
+7    [D(6+0=6), G(7+0=7), G(10+0=10)]                    STALE D   6+0=6    -
+8    [G(7+0=7), G(10+0=10)]                              G         7+0=7    -   <- GOAL
+UCS: path S -> A -> C -> G | reported cost 7 | independent sum 2 + 2 + 3 = 7 | processed order S A B C E D G | expansions (goal included) 7 | excluding goal 6 | stale pops 1
+
+=== Overestimate experiment: h(C) 3 -> 10 (one value changed) ===
+original h(C) = 3, modified h(C) = 10, true remaining cost h*(C) = 3
+audit of modified heuristic:
+  S: h=6  h*=7  admissible
+  A: h=4  h*=5  admissible
+  B: h=5  h*=7  admissible
+  C: h=10  h*=3  OVERESTIMATE
+  D: h=4  h*=5  admissible
+  E: h=6  h*=8  admissible
+  G: h=0  h*=0  admissible
+  admissible: False | consistent: False | violated: C->G, C->A
+step frontier before (node(g+h=f))                       processed g+h=f    generated / skipped
+1    [S(0+6=6)]                                          S         0+6=6    A(2+4=6), B(3+5=8)
+2    [A(2+4=6), B(3+5=8)]                                A         2+4=6    C(4+10=14), D(6+4=10)  | skipped (already processed): S
+3    [B(3+5=8), D(6+4=10), C(4+10=14)]                   B         3+5=8    D(5+4=9), E(4+6=10)  | skipped (already processed): S
+4    [D(5+4=9), D(6+4=10), E(4+6=10), C(4+10=14)]        D         5+4=9    G(10+0=10)  | skipped (already processed): A, B
+5    [D(6+4=10), E(4+6=10), G(10+0=10), C(4+10=14)]      STALE D   6+4=10   -
+6    [E(4+6=10), G(10+0=10), C(4+10=14)]                 E         4+6=10   -  | skipped (already processed): B
+7    [G(10+0=10), C(4+10=14)]                            G         10+0=10  -   <- GOAL
+A* with h(C)=10: path S -> B -> D -> G | reported cost 10 | independent sum 3 + 2 + 5 = 10 | processed order S A B D E G | expansions (goal included) 6 | excluding goal 5 | stale pops 1
+changed vs baseline A*: path changed, cost 7 -> 10, expansions 4 -> 6
+
+=== Supplementary experiment: h(E) 6 -> 20 (one value changed, node off the optimal path) ===
+original h(E) = 6, modified h(E) = 20, true remaining cost h*(E) = 8
+audit of modified heuristic:
+  S: h=6  h*=7  admissible
+  A: h=4  h*=5  admissible
+  B: h=5  h*=7  admissible
+  C: h=3  h*=3  admissible
+  D: h=4  h*=5  admissible
+  E: h=20  h*=8  OVERESTIMATE
+  G: h=0  h*=0  admissible
+  admissible: False | consistent: False | violated: E->B
+A* with h(E)=20: path S -> A -> C -> G | reported cost 7 | independent sum 2 + 2 + 3 = 7 | processed order S A C G | expansions (goal included) 4 | excluding goal 3 | stale pops 0
+changed vs baseline A*: path same, cost 7 -> 7, expansions 4 -> 4
