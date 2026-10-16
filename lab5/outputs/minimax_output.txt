@@ -1,0 +1,35 @@
+NOTE: tree and leaf values are synthetic lab assumptions.
+
+MINIMAX (post-order evaluation)
+  D (MAX): children ['L1', 'L2'] values [3, 5] -> 5
+  E (MAX): children ['L3', 'L4'] values [6, 9] -> 9
+  B (MIN): children ['D', 'E'] values [5, 9] -> 5
+  F (MAX): children ['L5', 'L6'] values [1, 2] -> 2
+  G (MAX): children ['L7', 'L8'] values [0, -1] -> 0
+  C (MIN): children ['F', 'G'] values [2, 0] -> 0
+  A (MAX): children ['B', 'C'] values [5, 0] -> 5
+  root value 5 | leaves evaluated 8 | order L1 L2 L3 L4 L5 L6 L7 L8
+
+ALPHA-BETA trace
+  enter A (MAX) alpha=-inf beta=+inf
+  enter B (MIN) alpha=-inf beta=+inf
+  enter D (MAX) alpha=-inf beta=+inf
+  evaluate leaf L1 = 3 (leaf #1)
+  evaluate leaf L2 = 5 (leaf #2)
+  return D = 5
+  enter E (MAX) alpha=-inf beta=5
+  evaluate leaf L3 = 6 (leaf #3)
+  CUTOFF at E: v=6 >= beta=5 -> prune L4 (leaves L4)
+  return E = 6
+  return B = 5
+  enter C (MIN) alpha=5 beta=+inf
+  enter F (MAX) alpha=5 beta=+inf
+  evaluate leaf L5 = 1 (leaf #4)
+  evaluate leaf L6 = 2 (leaf #5)
+  return F = 2
+  CUTOFF at C: v=2 <= alpha=5 -> prune G (leaves L7, L8)
+  return C = 2
+  return A = 5
+  root value 5 | leaves evaluated 5 | order L1 L2 L3 L5 L6
+
+Same root value: True | minimax leaves 8 vs alpha-beta leaves 5

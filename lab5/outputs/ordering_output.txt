@@ -1,0 +1,19 @@
+NOTE: tree, leaf values and random leaves are synthetic lab assumptions.
+
+Supplied tree: Minimax root value 5, leaves evaluated 8
+
+ordering      alpha-beta value  leaves  pruned  leaves evaluated (in order)
+original      5                 5       3       L1 L2 L3 L5 L6
+reversed      5                 7       1       L8 L7 L6 L4 L3 L2 L1
+root_swapped  5                 7       1       L5 L6 L7 L8 L1 L2 L3
+best          5                 5       3       L2 L1 L4 L7 L8
+worst         5                 8       0       L5 L6 L8 L7 L3 L4 L1 L2
+
+All alpha-beta values equal the Minimax value: True
+
+Random trees: 200 trials, branching 3, depth 4, seed 42
+  Minimax always evaluates 81 leaves
+  alpha-beta, original ordering: mean leaves 43.0 (min 19, max 63)
+  alpha-beta, best     ordering: mean leaves 17.0 (min 17, max 17)
+  alpha-beta, worst    ordering: mean leaves 77.7 (min 67, max 81)
+  trials where alpha-beta value equalled Minimax in every ordering: 200 of 200

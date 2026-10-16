@@ -1,0 +1,19 @@
+PASS  Minimax node values D,E,B,F,G,C,A (post-order)
+PASS  Minimax root value
+PASS  Minimax leaves evaluated
+PASS  Alpha-beta root value equals Minimax
+PASS  Alpha-beta leaves evaluated (original order)
+PASS  Cut-offs: E prunes L4, C prunes L7 and L8
+PASS  Alpha-beta returns a bound (6) for pruned node E, not its exact value 9
+PASS  ordering original: root value 5 and 5 leaves
+PASS  ordering reversed: root value 5 and 7 leaves
+PASS  ordering root_swapped: root value 5 and 7 leaves
+PASS  ordering best: root value 5 and 5 leaves
+PASS  ordering worst: root value 5 and 8 leaves
+PASS  reversed order of leaves evaluated
+PASS  all-equal leaves: value 0, 5 leaves evaluated (cut-offs with >= and <=)
+PASS  random trees: alpha-beta value equals Minimax in all orderings
+PASS  random trees: alpha-beta never evaluates more than Minimax's 81 leaves
+PASS  random trees: best-ordering evaluates 17 leaves every time
+
+17 of 17 checks passed

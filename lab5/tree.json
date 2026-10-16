@@ -1,0 +1,13 @@
+{
+  "name": "A",
+  "children": [
+    {"name": "B", "children": [
+      {"name": "D", "children": [{"name": "L1", "value": 3}, {"name": "L2", "value": 5}]},
+      {"name": "E", "children": [{"name": "L3", "value": 6}, {"name": "L4", "value": 9}]}
+    ]},
+    {"name": "C", "children": [
+      {"name": "F", "children": [{"name": "L5", "value": 1}, {"name": "L6", "value": 2}]},
+      {"name": "G", "children": [{"name": "L7", "value": 0}, {"name": "L8", "value": -1}]}
+    ]}
+  ]
+}
